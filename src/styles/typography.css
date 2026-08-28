@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Old Hanoi Newspaper Typography Foundations
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+body,
+p,
+span,
+li {
+  font-family: var(--font-body);
+  color: var(--ink-soft);
+  line-height: var(--leading-relaxed);
+  text-rendering: optimizeLegibility;
+}
+
+code,
+pre,
+kbd,
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Editorial Typographic Elements
+   ========================================================================== */
+
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-red);
+}
+
+.subdeck {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: var(--text-subdeck);
+  line-height: var(--leading-normal);
+  color: var(--ink-soft);
+}
+
+.editorial-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--ink);
+  border-top: var(--border-double);
+  border-bottom: var(--border-double);
+  padding: var(--space-4) 0;
+  margin: var(--space-6) 0;
+  text-align: center;
+}
+
+.editorial-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  color: var(--ink-faded);
+  margin-top: var(--space-2);
+}
+
+.editorial-byline {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faded);
+}
