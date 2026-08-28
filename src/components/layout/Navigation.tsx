@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { label: "Bìa", href: "#cover" },
   { label: "Trang Nhất", href: "#newspaper" },
   { label: "Dự Án", href: "#projects" },
+  { label: "Năng Lực", href: "#capabilities" },
   { label: "Học Vấn", href: "#archive" },
   { label: "Tiểu Sử", href: "#about" },
   { label: "Liên Hệ", href: "#contact" },

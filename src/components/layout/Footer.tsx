@@ -1,37 +1,40 @@
+import Link from "next/link";
 import { Container } from "@/components/ui";
-import { EditorialRule } from "@/components/editorial";
 import { profileData } from "@/content";
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-rule bg-paper py-10 text-center font-mono text-xs text-ink-faded">
-      <Container className="space-y-4">
-        <div className="grid grid-cols-1 gap-4 text-center md:grid-cols-3 md:text-left">
-          <div>
-            <span className="font-bold uppercase text-ink">TÒA SOẠN & XUẤT BẢN</span>
-            <p className="mt-1 font-body text-xs text-ink-soft">
-              {profileData.location.public} • Niên khóa 2026
-            </p>
+    <footer className="border-t-2 border-rule bg-paper-warm py-8 sm:py-10 text-ink">
+      <Container>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-ink-muted">
+          {/* Identity & Colophon */}
+          <div className="flex flex-wrap items-center gap-2 text-center sm:text-left">
+            <strong className="text-ink uppercase font-bold">{profileData.name}</strong>
+            <span>•</span>
+            <span>{profileData.title}</span>
+            <span>•</span>
+            <span>{profileData.location.public}</span>
           </div>
-          <div className="md:text-center">
-            <span className="font-bold uppercase text-ink">CHỦ NHIỆM & KỸ SƯ BACKEND</span>
-            <p className="mt-1 font-body text-xs text-ink-soft">
-              {profileData.name} ({profileData.handle})
-            </p>
-          </div>
-          <div className="md:text-right">
-            <span className="font-bold uppercase text-ink">HỒ SƠ LƯU KHO SỐ</span>
-            <p className="mt-1 font-mono text-xs font-bold text-accent-red">
-              HS-2026/FPT
-            </p>
+
+          {/* End of Edition Device & Back to Top */}
+          <div className="flex items-center gap-4">
+            <span className="border border-rule bg-paper px-2 py-0.5 font-bold uppercase tracking-widest text-accent-red">
+              ■ SỐ 001 · HẾT
+            </span>
+            <Link
+              href="#cover"
+              className="text-ink transition-colors hover:text-accent-red underline underline-offset-4 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-red"
+              aria-label="Trở về đầu trang bìa"
+            >
+              Đầu trang ↑
+            </Link>
           </div>
         </div>
 
-        <EditorialRule variant="double" className="my-4" />
-
-        <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-ink-muted">
-          <p>© {new Date().getFullYear()} {profileData.name}. Bảo lưu mọi quyền xuất bản kỹ thuật số.</p>
-          <p className="italic font-body">Hồ sơ năng lực kỹ thuật • Đại học FPT.</p>
+        {/* Minimal Copyright Line */}
+        <div className="mt-4 border-t border-rule-light pt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-ink-muted">
+          <p>© {new Date().getFullYear()} {profileData.name} (@{profileData.handle}). All rights reserved.</p>
+          <p>Ấn bản kỹ thuật số • Đại học FPT</p>
         </div>
       </Container>
     </footer>

@@ -1,122 +1,162 @@
+import Image from "next/image";
 import { Container } from "@/components/ui";
-import {
-  SectionLabel,
-  Headline,
-  ArticleBlock,
-  EditorialRule,
-  NewspaperGrid,
-  NewspaperColumn,
-  HistoricalImage,
-  ArchiveStamp,
-} from "@/components/editorial";
-import { profileData, skillsData } from "@/content";
+import { profileData } from "@/content";
 
 export function AboutSection() {
   return (
-    <section id="about" className="border-b-2 border-rule bg-paper py-12">
+    <section
+      id="about"
+      data-about-section
+      className="relative border-b-2 border-rule bg-paper py-14 sm:py-20 lg:py-24 overflow-hidden"
+    >
       <Container>
-        <SectionLabel label="TRANG 04 • TIỂU SỬ TÁC GIẢ & CHỈ MỤC KỸ THUẬT" pageNumber="04" />
+        {/* ==========================================================================
+            TRANSITION FROM CREDENTIALS:
+            Credentials (FORMAL EVIDENCE) → About (THE PERSON BEHIND THE EVIDENCE)
+            ========================================================================== */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rule-light pb-3">
+          <div className="flex items-center gap-2.5">
+            <span className="inline-block h-2.5 w-2.5 bg-accent-red" />
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-red">
+              PROFILE / 05
+            </span>
+            <span className="font-mono text-xs text-ink-muted">
+              • HỒ SƠ TÁC GIẢ
+            </span>
+          </div>
 
-        <div className="mt-8">
-          <NewspaperGrid>
-            {/* Left Column (4 cols): Profile Snapshot & Illustration */}
-            <NewspaperColumn span={4} hasBorderRight>
-              <div className="space-y-4">
-                <HistoricalImage
-                  src="/images/generated/vintage-typewriter-illustration-800.webp"
-                  alt="Minh họa máy đánh chữ"
-                  caption="Công cụ lao động của người làm chữ: từ cơ học đến mã nguồn phần mềm."
-                  source="Bản khắc mộc bản"
-                  aspectRatio="square"
+          <div className="flex items-center gap-3 font-mono text-xs text-ink-muted">
+            <span>HS-001</span>
+            <span className="text-accent-red">•</span>
+            <span>{profileData.location.public}</span>
+          </div>
+        </div>
+
+        {/* ==========================================================================
+            ASYMMETRIC 12-COLUMN PROFILE COMPOSITION (GENEROUS NEGATIVE SPACE)
+            Left 5 Cols: Framed Editorial Portrait + Archival Cartographic Background
+            Right 7 Cols: Name, Identity, Concise Narrative & Technical Summary
+            ========================================================================== */}
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* ========================================================================
+              LEFT 5 COLUMNS: EDITORIAL PORTRAIT
+              ======================================================================== */}
+          <div className="lg:col-span-5">
+            <div className="relative mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+              {/* Single Subtle Historical Layer: Historical Hanoi Map plan (Watermark) */}
+              <div
+                aria-hidden="true"
+                className="absolute -inset-4 sm:-inset-6 border border-rule-light bg-paper-warm/80 overflow-hidden opacity-90 -z-10 shadow-sm"
+              >
+                <Image
+                  src="/images/generated/hanoi-map-plan-1890-800.webp"
+                  alt=""
+                  fill
+                  className="object-cover opacity-15 mix-blend-multiply"
                 />
+              </div>
 
-                <div className="border border-rule bg-paper-warm p-4 text-center">
-                  <h3 className="font-display text-base font-bold text-ink">
-                    {profileData.name.toUpperCase()}
-                  </h3>
-                  <p className="font-mono text-xs uppercase text-accent-red font-bold">
-                    {profileData.title}
-                  </p>
-                  <p className="mt-2 font-body text-xs text-ink-soft">
-                    {profileData.educationStatus}
-                  </p>
-                  <p className="mt-1 font-mono text-[11px] text-ink-faded">
-                    Địa bàn: {profileData.location.public}
-                  </p>
+              {/* Framed Portrait Box */}
+              <div className="relative border-2 border-rule bg-paper p-3 sm:p-4 shadow-md">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-paper-warm flex items-end justify-center">
+                  <Image
+                    src="/images/profile/tran-kim-thang-cutout.webp"
+                    alt="Chân dung Trần Kim Thắng - Backend Developer Intern"
+                    width={480}
+                    height={600}
+                    className="h-full w-auto object-contain object-bottom filter contrast-[1.03] brightness-[0.98]"
+                  />
+                  {/* Subtle paper vignette at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper/60 to-transparent pointer-events-none" />
                 </div>
 
-                <div className="border-t border-rule-light pt-2 text-center">
-                  <ArchiveStamp variant="seal" text="CHỨNG THỰC" />
+                {/* Bottom Frame Meta */}
+                <div className="mt-3 flex items-center justify-between border-t border-rule-light pt-2 font-mono text-[11px] text-ink-muted">
+                  <span className="font-bold text-accent-red">HS-001</span>
+                  <span>@{profileData.handle}</span>
                 </div>
               </div>
-            </NewspaperColumn>
+            </div>
+          </div>
 
-            {/* Right Column (8 cols): Bio & Technical Experience Index */}
-            <NewspaperColumn span={8}>
-              <Headline
-                kicker="TIỂU SỬ NGHỀ NGHIỆP"
-                size="display-lg"
-                subdeck="Hành trình học tập và phát triển hệ thống backend chất lượng cao trên nền tảng Java Spring Boot và NodeJS."
-              >
-                {profileData.name.toUpperCase()} — {profileData.title.toUpperCase()}
-              </Headline>
+          {/* ========================================================================
+              RIGHT 7 COLUMNS: IDENTITY & EDITORIAL NARRATIVE
+              ======================================================================== */}
+          <div className="lg:col-span-7 space-y-6 sm:space-y-7">
+            <div>
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-accent-red">
+                KỸ SƯ PHÁT TRIỂN BACKEND
+              </span>
+              <h2 className="mt-1 font-[family-name:var(--font-sans-display)] text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ink leading-[0.95]">
+                {profileData.name}
+              </h2>
+              <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider text-ink-soft">
+                <span>{profileData.title}</span>
+                <span className="text-accent-red">•</span>
+                <span>{profileData.educationStatus}</span>
+              </div>
+            </div>
 
-              <EditorialRule variant="single" className="my-4" />
+            {/* Concise Editorial Narrative (2 Short Paragraphs) */}
+            <div className="space-y-3.5 font-body text-sm sm:text-base leading-relaxed text-ink-soft max-w-2xl">
+              <p>
+                Sinh viên chuyên ngành Kỹ thuật Phần mềm tại Đại học FPT, định hướng chuyên sâu
+                về phát triển hệ thống Backend với <strong>Java Spring Boot</strong> và <strong>NodeJS</strong>.
+              </p>
+              <p>
+                Tập trung xây dựng các dịch vụ web RESTful có kiến trúc chuẩn mực, cơ chế bảo mật
+                phân quyền nghiêm ngặt và khả năng tích hợp trí tuệ nhân tạo (AI) trong các bài toán thực tế.
+              </p>
+            </div>
 
-              <ArticleBlock
-                hasDropCap
-                byline="HỒ SƠ NĂNG LỰC"
-                category="TỔNG QUAN"
-              >
-                <p>{profileData.editorialBio}</p>
-              </ArticleBlock>
+            {/* Technical Identity Summary */}
+            <div className="border-t border-rule-light pt-5 space-y-3 max-w-2xl">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-muted">
+                TÓM LƯỢC TRỌNG TÂM KỸ THUẬT
+              </span>
 
-              <div className="mt-6 border-t-2 border-rule pt-4">
-                <h4 className="font-display text-base font-bold text-ink uppercase">
-                  CHỈ MỤC KỸ NĂNG & CÔNG NGHỆ THỰC NGHIỆM
-                </h4>
-                <p className="font-body text-xs text-ink-faded">
-                  Toàn bộ các danh mục kỹ thuật dưới đây đều được chứng minh qua sản phẩm phần mềm thực tế hoặc định hướng học thuật rõ ràng.
-                </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+                <div className="border border-rule-light bg-paper-warm p-3">
+                  <span className="text-[10px] font-bold uppercase text-accent-red block">
+                    CỐT LÕI (CORE)
+                  </span>
+                  <span className="mt-1 font-bold text-ink block">
+                    Java · Spring Boot 3.2
+                  </span>
+                </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                  {skillsData.map((category) => (
-                    <div
-                      key={category.id}
-                      className="border border-rule-light bg-paper-warm p-3"
-                    >
-                      <span className="font-mono text-[10px] font-bold uppercase text-accent-red">
-                        {category.kicker}
-                      </span>
-                      <h5 className="mt-0.5 font-display text-xs font-bold text-ink">
-                        {category.name}
-                      </h5>
+                <div className="border border-rule-light bg-paper-warm p-3">
+                  <span className="text-[10px] font-bold uppercase text-ink-muted block">
+                    CHỨNG THỰC DỰ ÁN
+                  </span>
+                  <span className="mt-1 font-bold text-ink block">
+                    PostgreSQL · Security · AI
+                  </span>
+                </div>
 
-                      <ul className="mt-2 space-y-1 font-body text-xs text-ink-soft">
-                        {category.items.map((item) => (
-                          <li key={item.name} className="flex flex-col">
-                            <span className="font-mono font-semibold text-ink">
-                              • {item.name}
-                              {item.isCoreDirection && (
-                                <span className="ml-1 text-[10px] text-accent-red font-normal">
-                                  (Định hướng)
-                                </span>
-                              )}
-                            </span>
-                            {item.note && (
-                              <span className="text-[11px] text-ink-faded pl-3">
-                                {item.note}
-                              </span>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="border border-rule-light bg-paper-warm p-3">
+                  <span className="text-[10px] font-bold uppercase text-ink-muted block">
+                    ĐỊNH HƯỚNG MỞ RỘNG
+                  </span>
+                  <span className="mt-1 font-bold text-ink block">
+                    NodeJS Ecosystem
+                  </span>
                 </div>
               </div>
-            </NewspaperColumn>
-          </NewspaperGrid>
+            </div>
+
+            {/* Location & Digital Handle Badge */}
+            <div className="pt-1 flex flex-wrap items-center gap-4 font-mono text-xs text-ink-muted">
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block h-2 w-2 rounded-full bg-emerald-600" />
+                <span>Địa bàn công tác: <strong className="text-ink">{profileData.location.public}</strong></span>
+              </div>
+              <span>•</span>
+              <div>
+                <span>Chữ ký số: <strong className="text-ink">@{profileData.handle}</strong></span>
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
